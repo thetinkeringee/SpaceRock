@@ -4,6 +4,7 @@ from constants import PLAYER_TURN_SPEED
 from constants import PLAYER_SPEED
 import pygame
 from typing import Tuple
+from shot import Shot
 
 class Player(CircleShape):
     containers:Tuple
@@ -42,10 +43,16 @@ class Player(CircleShape):
             self.rotate(-dt)    
         if keys[pygame.K_d]:
             self.rotate(dt) 
+        if keys[pygame.K_SPACE]:
+            self.shoot()
 
 
     def move(self, dt):
         vec = pygame.Vector2(0,1).rotate(self.rotation)
         self.position += vec * PLAYER_SPEED * dt
 
+    def shoot(self): 
+        shot = Shot(self.position.x, self.position.y, self.rotation)
+        
+        
 
